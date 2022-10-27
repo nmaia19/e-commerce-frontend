@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>E-commerce</title>
 
-    <script src="./scripts/home.js"></script>
+    <script defer src="./scripts/home.js"></script>
     <link rel="stylesheet" href="./styles/home.css" />
   </head>
   <body>
@@ -26,32 +26,36 @@
             <a href="./pages/roupa.html"> Roupas </a>
           </li>
         </ul>
-        <a href="#"
-          ><svg
-          class="cart-icon"
-          xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          style="fill: rgb(55, 55, 55)"
-        >
-          <path
-            d="M21.822 7.431A1 1 0 0 0 21 7H7.333L6.179 4.23A1.994 1.994 0 0 0 4.333 3H2v2h2.333l4.744 11.385A1 1 0 0 0 10 17h8c.417 0 .79-.259.937-.648l3-8a1 1 0 0 0-.115-.921zM17.307 15h-6.64l-2.5-6h11.39l-2.25 6z"
-          ></path>
-          <circle cx="10.5" cy="19.5" r="1.5"></circle>
-          <circle cx="17.5" cy="19.5" r="1.5"></circle>
-        </svg></a>
 
-        <!-- DIV DO CARRINHO SOBRE POSTA -->
+        <button id="open-cart">
+            <svg
+              class="cart-icon"
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              style="fill: rgb(55, 55, 55)"
+            >
+              <path
+                d="M21.822 7.431A1 1 0 0 0 21 7H7.333L6.179 4.23A1.994 1.994 0 0 0 4.333 3H2v2h2.333l4.744 11.385A1 1 0 0 0 10 17h8c.417 0 .79-.259.937-.648l3-8a1 1 0 0 0-.115-.921zM17.307 15h-6.64l-2.5-6h11.39l-2.25 6z"
+              ></path>
+              <circle cx="10.5" cy="19.5" r="1.5"></circle>
+              <circle cx="17.5" cy="19.5" r="1.5"></circle>
+            </svg>
+        </button>
+
+        <!-- CARRINHO DE COMPRAS -->
         <div class="carrinho">
             <h2 class="carrinho__title">Seu carrinho</h2>
 
             <div class="carrinho__content">
+                
+                <!-- itens gerados dinamicamente -->
                 <div class="cart__content-box">
                     <img src="./assets/produtos/airdots01.jpg" alt="" class="img-cart">
                     <div class="detalhes-cart">
                         <div class="cart-product-title">AirDots</div>
-                        <div class="cart-price">R$ 250,00</div>
+                        <div class="cart-price">R$ 250.33</div>
                         <input type="number" value="1" class="cart-qntd">
                     </div>
                     <svg class="remove-item" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill: rgb(197, 63, 53);"><path d="M15 2H9c-1.103 0-2 .897-2 2v2H3v2h2v12c0 1.103.897 2 2 2h10c1.103 0 2-.897 2-2V8h2V6h-4V4c0-1.103-.897-2-2-2zM9 4h6v2H9V4zm8 16H7V8h10v12z"></path></svg>
