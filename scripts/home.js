@@ -16,14 +16,14 @@ closeCart.onclick = () => {
 
 // CARRINHO - FUNCIONAMENTO
 
-if(document.readyState == "loading"){
+if (document.readyState == "loading") {
     document.addEventListener("DOMContentLoaded", ready)
 } else {
     ready()
 }
 
 
-function ready(){
+function ready() {
 
     // ----- EXCLUIR ITENS -----
     // identifica todos os botoes de remover que estiverem presentes no carrinho
@@ -39,7 +39,7 @@ function ready(){
 
     let qntdInput = document.getElementsByClassName('cart-qntd')
 
-    for (let i = 0; i < qntdInput.length; i++){
+    for (let i = 0; i < qntdInput.length; i++) {
         let input = qntdInput[i]
         input.addEventListener('change', updateItemQntd)
     }
@@ -53,11 +53,15 @@ function ready(){
         buttonAdd.addEventListener('click', getProductData)
     }
 
+    // COMPRAR
+
+    document.getElementsByClassName('btn-buy')[0].addEventListener('click', buyClicked)
+
 }
 
 // FUNÇÕES PRINCIPAIS CHAMADAS PELOS EVENTOS DA PÁGINA
 
-function getProductData(event){
+function getProductData(event) {
     let buttonClicked = event.target
     let relatedProduct = buttonClicked.parentElement
     let title = relatedProduct.getElementsByClassName('item__title')[0].innerText
@@ -67,28 +71,58 @@ function getProductData(event){
     updateTotal()
 }
 
-function addToCart(title, price, img){
-    // carrinho em si, onde já pode existir outros produtos
-    let carrinho = document.getElementsByClassName('carrinho__content')
-
+function addToCart(title, price, img) { 
     //criando o novo elemento
     let newCartItem = document.createElement('div')
-    newCartItem.classList.add('cart__content-box')
-
-    // nomes dos produtos que já estão no carrinho, para controle de quantidades
+    newCartItem.classList.add('cart__content-box') // onde vai entrar o cartContentBoxHTML
+    
+    // carrinho em si, onde já pode existir outros produtos
+    let carrinho = document.getElementsByClassName('carrinho__content')[0]
+    // lista com os nomes dos produtos que já estão no carrinho, para controle de quantidades
     let cartItemsNames = carrinho.getElementsByClassName('cart-product-title')
+    for (let i = 0; i < cartItemsNames.length; i++) {
+        if (cartItemsNames[i].innerText == title) {
+            alert("Item já adicionado, controle a quantidade no carrinho")
+            return
+        }
+    }
+
+    let cartContentBoxHTML = `
+                        <img src="${img}" alt="" class="img-cart">
+                        <div class="detalhes-cart">
+                            <div class="cart-product-title">${title}</div>
+                            <div class="cart-price">${price}</div>
+                            <input type="number" value="1" class="cart-qntd">
+                        </div>
+                        <svg class="remove-item" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill: rgb(197, 63, 53);"><path d="M15 2H9c-1.103 0-2 .897-2 2v2H3v2h2v12c0 1.103.897 2 2 2h10c1.103 0 2-.897 2-2V8h2V6h-4V4c0-1.103-.897-2-2-2zM9 4h6v2H9V4zm8 16H7V8h10v12z"></path></svg>
+                        `
+    newCartItem.innerHTML = cartContentBoxHTML
+    carrinho.append(newCartItem)
+
+    newCartItem.getElementsByClassName('remove-item')[0].addEventListener('click', removeItemCart)
+    newCartItem.getElementsByClassName('cart-qntd')[0].addEventListener('change', updateItemQntd)
 }
 
-function removeItemCart(event){
+
+function removeItemCart(event) {
     var buttonClicked = event.target
-    console.log(buttonClicked.parentElement);
     buttonClicked.parentElement.remove();
     updateTotal()
 }
 
-function updateItemQntd(event){
+function buyClicked(){
+    alert("Compra Efetuada!")
+    let conteudoCart = document.getElementsByClassName("carrinho__content")[0]
+    while (conteudoCart.hasChildNodes()){
+        conteudoCart.removeChild(conteudoCart.firstChild)
+    }
+    updateTotal()
+}
+
+
+function updateItemQntd(event) {
     var input = event.target
-    if(isNaN(input.value) || input.value <=0){
+    if (isNaN(input.value) || input.value <= 0) {
         input.value = 1
     }
     updateTotal()
@@ -107,11 +141,10 @@ function updateTotal() {
         let price = parseFloat(priceElement.innerText.replace("R$ ", ""))
 
         total += price * quantity
-        total = Math.round(total * 100) / 100
-
-        document.getElementsByClassName("cart-total-price")[0].innerText = "R$ " + total
-
+        console.log(total);
     }
+    total = Math.round(total * 100) / 100
+    document.getElementsByClassName("cart-total-price")[0].innerText = "R$ " + total
 
 
 }
