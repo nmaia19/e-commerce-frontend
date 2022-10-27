@@ -73,6 +73,7 @@ header {
   height: 3em;
 }
 
+
 .cart-icon {
   cursor: pointer;
 }
@@ -197,7 +198,7 @@ header {
     text-align: center; 
 }
 .loja__subtitle {
-    margin-top: 2rem;
+    margin-block: 2rem;
     font-size: 1.5rem;
     font-weight: 500;
     text-align: center;
@@ -211,12 +212,12 @@ header {
 
 .content__item {
     position: relative;
+    padding: 20px;
 }
 
 .content__item:hover {
-    padding: 10px;
-    border: 1px solid var(--text-color);
-    transition: 0.4s;
+    box-shadow: 4px 20px 40px hsl(0 4% 15% / 10%);
+    transition: 0.3s;
 }
 
 .item__img{
