@@ -54,6 +54,32 @@ const tenis = [
 
 ]
 
+const roupas = [
+    {
+        nome: "Kappa Básica",
+        preco: "R$ 39.15",
+        img: "./assets/produtos/camisa01.png",
+        estoque: 20
+    },
+    {
+        nome: "ADIDAS 3 STRIPES",
+        preco: "R$ 178.99",
+        img: "./assets/produtos/camisa02.png",
+        estoque: 20
+    },
+    {
+        nome: "AEROREADY",
+        preco: "R$ 129.95",
+        img: "./assets/produtos/camisa03.png",
+        estoque: 20
+    },
+    {
+        nome: "AEROREADY ROSA",
+        preco: "R$ 129.95",
+        img: "./assets/produtos/camisa04.png",
+        estoque: 20
+    },
+]
 
 // CARRINHO
 
@@ -251,17 +277,11 @@ function displayProducts() {
 }
 
 function getProdutos() {
-    let produtos = [...fones, ...tenis]
+    let produtos = [...fones, ...tenis, ...roupas]
     return produtos
 }
 
 
-
-/*
-
-    - INVENTARIO DE PRODUTOS
-
-*/
 
 
 
