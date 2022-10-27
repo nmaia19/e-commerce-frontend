@@ -1,4 +1,63 @@
+const fones = [
+    {
+        nome: "AirDots 2",
+        preco: "R$ 242.15",
+        img: "./assets/produtos/airdots01.jpg",
+        estoque: 20
+    },
+    {
+        nome: "JBL Endurance",
+        preco: "R$ 217.99",
+        img: "./assets/produtos/jbl_endurance.png",
+        estoque: 20
+    },
+    {
+        nome: "Jbl Tune",
+        preco: "R$ 89.95",
+        img: "./assets/produtos/jbl_tune.png",
+        estoque: 20
+    },
+    {
+        nome: "AirDots 2",
+        preco: "R$ 242.15",
+        img: "./assets/produtos/airdots01.jpg",
+        estoque: 20
+    },
+
+]
+
+const tenis = [
+    {
+        nome: "Nike Waffle",
+        preco: "R$ 349.15",
+        img: "./assets/produtos/tenis04.png",
+        estoque: 20
+    },
+    {
+        nome: "Nike Court Legacy",
+        preco: "R$ 499.99",
+        img: "./assets/produtos/tenis03.png",
+        estoque: 20
+    },
+    {
+        nome: "Coreracer",
+        preco: "R$ 68.95",
+        img: "./assets/produtos/tenis01.png",
+        estoque: 20
+    },
+    {
+        nome: "Nike Court",
+        preco: "R$ 479.15",
+        img: "./assets/produtos/tenis02.png",
+        estoque: 20
+    },
+
+]
+
+
 // CARRINHO
+
+
 
 let openCart = document.getElementById('open-cart')
 let cart = document.querySelector('.carrinho')
@@ -24,6 +83,7 @@ if (document.readyState == "loading") {
 
 
 function ready() {
+    displayProducts()
 
     // ----- EXCLUIR ITENS -----
     // identifica todos os botoes de remover que estiverem presentes no carrinho
@@ -48,8 +108,10 @@ function ready() {
 
     let addCart = document.getElementsByClassName('add-cart')
 
+    console.log(addCart);
     for (let i = 0; i < addCart.length; i++) {
         let buttonAdd = addCart[i]
+        console.log(buttonAdd);
         buttonAdd.addEventListener('click', getProductData)
     }
 
@@ -71,11 +133,11 @@ function getProductData(event) {
     updateTotal()
 }
 
-function addToCart(title, price, img) { 
+function addToCart(title, price, img) {
     //criando o novo elemento
     let newCartItem = document.createElement('div')
     newCartItem.classList.add('cart__content-box') // onde vai entrar o cartContentBoxHTML
-    
+
     // carrinho em si, onde já pode existir outros produtos
     let carrinho = document.getElementsByClassName('carrinho__content')[0]
     // lista com os nomes dos produtos que já estão no carrinho, para controle de quantidades
@@ -110,10 +172,10 @@ function removeItemCart(event) {
     updateTotal()
 }
 
-function buyClicked(){
+function buyClicked() {
     alert("Compra Efetuada!")
     let conteudoCart = document.getElementsByClassName("carrinho__content")[0]
-    while (conteudoCart.hasChildNodes()){
+    while (conteudoCart.hasChildNodes()) {
         conteudoCart.removeChild(conteudoCart.firstChild)
     }
     updateTotal()
@@ -148,3 +210,58 @@ function updateTotal() {
 
 
 }
+
+
+function displayProducts() {
+    // pegando todos os produtos
+    let allProducts = getProdutos()
+
+    let gridLoja = document.getElementsByClassName('loja__content')[0]
+    //criando o novo elemento
+
+
+    allProducts.forEach(item => {
+        let divProduto = document.createElement('div')
+        divProduto.classList.add('content__item') // onde vai entrar o cartContentBoxHTML
+
+        let itemsDisplay = ``
+
+        itemsDisplay += `
+        <img src=${item.img} alt="" class="item__img" />
+        <h3 class="item__title">${item.nome}</h3>
+        <span class="item__price">${item.preco}</span>
+        <svg
+        class="add-cart"
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        style="fill: rgb(255, 255, 255)"
+        >
+        <path
+            d="M21.822 7.431A1 1 0 0 0 21 7H7.333L6.179 4.23A1.994 1.994 0 0 0 4.333 3H2v2h2.333l4.744 11.385A1 1 0 0 0 10 17h8c.417 0 .79-.259.937-.648l3-8a1 1 0 0 0-.115-.921zM17.307 15h-6.64l-2.5-6h11.39l-2.25 6z"
+        ></path>
+        <circle cx="10.5" cy="19.5" r="1.5"></circle>
+        <circle cx="17.5" cy="19.5" r="1.5"></circle>
+        </svg>
+        `
+        divProduto.innerHTML = itemsDisplay
+        gridLoja.append(divProduto)
+    })
+}
+
+function getProdutos() {
+    let produtos = [...fones, ...tenis]
+    return produtos
+}
+
+
+
+/*
+
+    - INVENTARIO DE PRODUTOS
+
+*/
+
+
+
